@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>食指-指令机</title>
+        <link rel="icon shortcut" href="./public/image/Index.png" sizes="256x256" nonce="">
+        <style>
+            @font-face {
+                font-family: 'ark_pixel';
+                src: url('./public/font/ark-pixel-16px-proportional-zh_cn.ttf') format('truetype');
+                src: url('./public/font/ark-pixel-16px-proportional-zh_hk.ttf') format('truetype');
+                src: url('./public/font/ark-pixel-16px-proportional-zh_tr.ttf') format('truetype');
+                src: url('./public/font/ark-pixel-16px-proportional-zh_tw.ttf') format('truetype');
+                src: url('./public/font/ark-pixel-16px-proportional-latin.ttf') format('truetype');
+                src: url('./public/font/ark-pixel-16px-proportional-ja.ttf') format('truetype');
+                src: url('./public/font/ark-pixel-16px-proportional-ko.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+                /* 可选：设置字体是否可跨域（如果字体文件在CDN上需要加） */
+                font-display: swap;
+            }
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body{
+                width: calc(100vw);
+                height: calc(100vh);
+                background-color: #000000;
+            }
+            .body_box{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .main_box{
+                width: 100%;
+                height: 100%;
+                padding: 2%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column nowrap;
+            }
+            .image_box,.image_box img{
+                width: 128px;
+                height: 128px;
+            }
+            .image_box{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .image_box img{
+                opacity: 0;
+                filter: blur(14px);
+                transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out 0.8s;
+            }
+            .image_box .img_show{
+                opacity: 1;
+                filter: blur(0px);
+            }
+            .text_box{
+                width: 50%;
+                min-width: 320px;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .commands_box{
+                width: 100%;
+                min-width: 320px;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column nowrap;
+            }
+            .command_code{
+                width: 100%;
+                min-height: 20px;
+                color: #A5F3FF;
+                font-size: 20px;
+                font-family: 'ark_pixel',sans-serif;
+                font-weight: bolder;
+                text-align: center;
+                text-shadow: 0px 0px 4px #98D8F0;
+                user-select: none;
+            }
+            .command_text{
+                width: 100%;
+                min-height: 14px;
+                color: #FFFFFF;
+                font-size: 14px;
+                font-family: '黑体';
+                text-align: center;
+                /* 换行 */
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                white-space: normal;
+            }
+            .get_btn{
+                color: #FFFFFF;
+                font-size: 16px;
+                text-align: center;
+                transition: color 0.5s ease-in-out;
+                user-select: none;
+                cursor: pointer;
+            }
+            .get_btn:hover{
+                color: #FF0000;
+            }
+            .copyright_box{
+                width: 100vw;
+                height: 0;
+                position: fixed;
+                bottom: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: row nowrap;
+            }
+            .copyright{
+                color: #CCCCCC;
+                font-size: 12px;
+                opacity: 0.5;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: opacity 0.5s ease-in-out;
+                user-select: none;
+                cursor: pointer;
+                z-index: 100;
+            }
+            .copyright:hover{
+                opacity: 1;
+            }
+        </style>
+        <!-- 导入指令 -->
+        <script src="./command/command.js"></script>
+        <script>
+            window.onload = function(){
+                let img1 = document.querySelector('.img1');
+                img1.className = 'img_show';
+                document.querySelector('.copyright').innerHTML = '© '+ new Date().getFullYear() + ' 福明';
+            }
+        </script>
+    </head>
+    <body>
+        <div class="body_box">
+            <div class="main_box">
+                <div class="image_box">
+                    <img class="img1" src="./public/image/Index.png" alt="食指">
+                </div>
+                <div class="text_box">
+                    <div class="commands_box">
+                        <div class="command_code">_%NONE%.</div>
+                        <div class="command_text">谨遵指令之意</div>
+                    </div>
+                </div>
+                <div class="get_commands">
+                    <div class="get_btn">- 接收指令 -</div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright_box">
+            <div class="copyright"></div>
+        </div>
+        <audio id="audio1" src="./public/audio/ticktock_type1.mp3"></audio>
+        <audio id="audio2" src="./public/audio/ticktock_type2.mp3"></audio>
+        <audio id="audio3" src="./public/audio/ticktock_type3.mp3"></audio>
+        <script>
+            const cmd = {
+                code:document.querySelector('.command_code'),
+                text:document.querySelector('.command_text')
+            };
+            const get_btn = document.querySelector('.get_btn');
+            const audios = [document.querySelector('#audio1'),document.querySelector('#audio2'),document.querySelector('#audio3')];
+            get_btn.addEventListener('click',()=>{
+                let index = Math.floor(Math.random()*commands1.length);
+                printCommand(commands1[index]);
+                audios[Math.floor(Math.random()*audios.length)].play();
+            });
+
+            // 渲染可用
+            var print_able = true;
+            // 渲染
+            function printCommand([code,text]){
+                if(!print_able){
+                    return;
+                };
+                try {
+                    print1(text,cmd.text);
+                    print2(code,cmd.code);
+                    print_able = false;
+                } catch (error) {
+                    console.log(error);
+                    return;
+                }
+            }
+            // 逐字渲染
+            function print1(text,obj){
+                try {
+                    let text_arr = text.split('');
+                    obj.innerHTML = '';
+                    text_arr.forEach((char, i) => {
+                        setTimeout(() => obj.innerHTML += char, i * 50);
+                    });
+                    // 复位可用状态
+                    print_able = true;
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            // 乱码渲染
+            function print2(text,obj){
+                try {
+                    let randomChars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.?'.split('');
+                    let textArr = text.split('');
+                    let len = textArr.length;
+                    // 已替换完成的字符索引（初始为-1，代表未开始替换）
+                    let replacedIndex = -1;
+                    obj.innerHTML = '';
+                    // 1. 乱码刷新定时器：刷新未替换的字符为随机乱码
+                    const randomTimer = setInterval(() => {
+                        let html = '';
+                        for (let i = 0; i < len; i++) {
+                            // 已替换的字符显示目标内容，未替换的显示随机乱码
+                            html += i <= replacedIndex ? textArr[i] : randomChars[Math.floor(Math.random() * randomChars.length)];
+                        }
+                        obj.innerHTML = html;
+                    }, 25);
+                    // 2. 逐个替换定时器：替换字符为目标内容
+                    const replaceTimer = setInterval(() => {
+                        replacedIndex++; // 推进到下一个要替换的字符
+                        // 所有字符替换完成后，清除定时器
+                        if (replacedIndex >= len - 1) {
+                            clearInterval(randomTimer);
+                            clearInterval(replaceTimer);
+                            obj.innerHTML = text;
+                            // 复位可用状态
+                            print_able = true;
+                        }
+                    }, 100);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        </script>
+    </body>
+</html>
