@@ -59,6 +59,7 @@
                 opacity: 0;
                 filter: blur(14px);
                 transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out 0.8s;
+                user-select: none;
             }
             .image_box .img_show{
                 opacity: 1;
@@ -115,7 +116,105 @@
             .get_btn:hover{
                 color: #FF0000;
             }
-            .copyright_box{
+            /* alert */
+            body .hide1{
+                display: none;
+            }
+            body .hide2{
+                opacity: 0;
+                transform: scale(0);
+            }
+            .alert_box_out{
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                top: 0px;
+                left: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                transition: opacity 0.6s ease-in-out,transform 0.6s ease-in-out;
+                /* z-index: -1; */
+            }
+            .alert_box{
+                width: 60%;
+                height: 65%;
+                box-shadow: 0px 0px 24px 2px rgba(255,255,255,0.5);
+                z-index: 100;
+            }
+            .alert_box_in{
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+                border: 4px solid #FFFFFF;
+                background-color: #000000;
+                box-shadow: 0px 0px 24px 2px rgba(255,255,255,0.4) inset;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                align-content: center;
+                flex-flow: column nowrap;
+                z-index: 100;
+            }
+            .alert_cbtn{
+                width: 100%;
+            }
+            .close_btn{
+                fill: #FF0000;
+                cursor: pointer;
+                transition: box-shadow 0.3s ease-in-out,transform 0.4s ease-in-out;
+            }
+            .close_btn:hover{
+                transform: scale(1.1);
+                box-shadow: 0px 0px 12px 0px #FF0000;
+            }
+            .alert_title{
+                font-size: 36px;
+                color: #FFFFFF;
+                text-shadow: 0px 0px 24px #FFFFFF;
+                user-select: none;
+            }
+            .alert_text{
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column nowrap;
+                z-index: 100;
+            }
+            .alert_text_items{
+                padding: 5px 0px;
+                font-size: 20px;
+                color: #FFFFFF;
+                text-align: left;
+                z-index: 100;
+            }
+            .alert_text_items>p{
+                margin: 0px;
+                padding: 0px;
+                text-shadow: 0px 0px 12px #FFFFFF;
+            }
+            .alert_text_items a {
+                text-decoration: none;
+                color: inherit;
+                background: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                font: inherit;
+                outline: none;
+            }
+            .alert_text_items a:hover,
+            .alert_text_items a:active,
+            .alert_text_items a:visited,
+            .alert_text_items a:focus{
+                text-decoration: none;
+                color: inherit;
+                outline: none;
+            }
+            .bottom_box{
                 width: 100vw;
                 height: 0;
                 position: fixed;
@@ -124,6 +223,29 @@
                 justify-content: center;
                 align-items: center;
                 flex-flow: row nowrap;
+            }
+            .others_box{
+                margin: 0px 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: row nowrap;
+            }
+            .join_text{
+                color: #CCCCCC;
+                font-size: 12px;
+                opacity: 0.5;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: opacity 0.5s ease-in-out;
+                user-select: none;
+                cursor: pointer;
+                z-index: 100;
+            }
+            .join_text:hover{
+                opacity: 1;
             }
             .copyright{
                 color: #CCCCCC;
@@ -169,9 +291,54 @@
                 </div>
             </div>
         </div>
-        <div class="copyright_box">
+        <div class="alert_box_out hide1 hide2">
+            <div class="alert_box">
+                <div class="alert_box_in">
+                    <div class="alert_title">参与项目制作</div>
+                    <div class="alert_text">
+                        <div class="alert_text_items">
+                            <p style="display: inline-block;user-select: none;">项目仓库链接:</p>
+                            https://github.com/fuming-397/command-receiver
+                            &nbsp;
+                            <a href="https://github.com/fuming-397/command-receiver" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="#FFFFFF" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="alert_text_items">
+                            <p style="display: inline-block;user-select: none;">提交新指令链接:</p>
+                            https://f.wps.cn/g/WmxIGdEw/
+                            &nbsp;
+                            <a href="https://f.wps.cn/g/WmxIGdEw/" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="#FFFFFF" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="alert_text_items">
+                            <p style="display: inline-block;user-select: none;">联系作者:</p>
+                            tangkf10100@outlook.com
+                        </div>
+                    </div>
+                    <div class="alert_cbtn">
+                        <svg class="close_btn" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_box">
+            <div class="others_box">
+                <div class="join_text">点此参与制作</div>
+            </div>
             <div class="copyright"></div>
         </div>
+        <div class=""></div>
         <audio id="audio1" src="./public/audio/ticktock_type1.mp3"></audio>
         <audio id="audio2" src="./public/audio/ticktock_type2.mp3"></audio>
         <audio id="audio3" src="./public/audio/ticktock_type3.mp3"></audio>
@@ -182,23 +349,30 @@
             };
             const get_btn = document.querySelector('.get_btn');
             const audios = [document.querySelector('#audio1'),document.querySelector('#audio2'),document.querySelector('#audio3')];
-            get_btn.addEventListener('click',()=>{
+            const join_text = document.querySelector('.join_text');
+            const alert_box_out = document.querySelector('.alert_box_out');
+            const alert_cbtn = document.querySelector('.alert_cbtn');
+            // 音效可用
+            var audio_able = true;
+            get_btn.addEventListener('click',function(){
                 let index = Math.floor(Math.random()*commands1.length);
                 printCommand(commands1[index]);
-                audios[Math.floor(Math.random()*audios.length)].play();
+                if (audio_able) {
+                    audios[Math.floor(Math.random()*audios.length)].play();
+                }
+                audio_able = false;
             });
-
             // 渲染可用
-            var print_able = true;
+            var print_able = [true,true];
             // 渲染
             function printCommand([code,text]){
-                if(!print_able){
+                if(!print_able[0]||!print_able[1]){
                     return;
                 };
                 try {
                     print1(text,cmd.text);
                     print2(code,cmd.code);
-                    print_able = false;
+                    print_able = [false,false];
                 } catch (error) {
                     console.log(error);
                     return;
@@ -210,10 +384,14 @@
                     let text_arr = text.split('');
                     obj.innerHTML = '';
                     text_arr.forEach((char, i) => {
-                        setTimeout(() => obj.innerHTML += char, i * 50);
+                        setTimeout(function(){
+                            obj.innerHTML += char;
+                            // 复位可用状态
+                            if (i == text_arr.length-1) {
+                                print_able[0] = true;
+                            }
+                        }, i * 50);
                     });
-                    // 复位可用状态
-                    print_able = true;
                 } catch (error) {
                     console.log(error);
                 }
@@ -245,12 +423,41 @@
                             clearInterval(replaceTimer);
                             obj.innerHTML = text;
                             // 复位可用状态
-                            print_able = true;
+                            print_able[1] = true;
+                            audio_able = true;
                         }
                     }, 100);
                 } catch (error) {
                     console.log(error);
                 }
+            }
+            
+            join_text.addEventListener('click',function(){
+                alertBoxVisible(true);
+                alert_box_able = false;
+            });
+            alert_cbtn.addEventListener('click',function(){
+                alertBoxVisible(false);
+                alert_box_able = false;
+            });
+            var alert_box_able = true;
+            function alertBoxVisible(is){
+                if (!alert_box_able) {
+                    return;
+                }
+                if (is) {
+                    alert_box_out.className = 'alert_box_out hide2';
+                    setTimeout(function(){
+                        alert_box_out.className = 'alert_box_out';
+                        alert_box_able = true;
+                    },100);
+                    return;
+                }
+                alert_box_out.className = 'alert_box_out hide2';
+                setTimeout(function(){
+                    alert_box_out.className = 'alert_box_out hide1 hide2';
+                    alert_box_able = true;
+                },600);
             }
         </script>
     </body>
