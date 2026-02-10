@@ -292,6 +292,8 @@
                 let img1 = document.querySelector('.img1');
                 img1.className = 'img_show';
                 document.querySelector('.copyright').innerHTML = '© '+ new Date().getFullYear() + ' 福明';
+                let last_time_arr = last_time.split('.');
+                document.querySelector('#last_time').innerHTML = `${parseInt(last_time_arr[0])}年${parseInt(last_time_arr[1])}月${parseInt(last_time_arr[2])}日`;
             }
         </script>
     </head>
@@ -342,6 +344,10 @@
                         <div class="alert_text_items">
                             <p style="display: inline-block;user-select: none;">联系作者:</p>
                             tangkf10100@outlook.com
+                        </div>
+                        <div class="alert_text_items">
+                            <p style="display: inline-block;user-select: none;">最后修改时间:</p>
+                            <p id="last_time" style="display: inline-block;user-select: none;"></p>
                         </div>
                     </div>
                     <div class="alert_cbtn">
